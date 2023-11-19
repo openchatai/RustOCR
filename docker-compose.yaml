@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  scanner:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: codebanesr/scanner:latest
+    ports:
+      - "8223:8000"
