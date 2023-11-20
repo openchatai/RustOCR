@@ -8,3 +8,8 @@ services:
     image: codebanesr/scanner:latest
     ports:
       - "8000:8000"
+    volumes:
+      - shared_data:/app/shared_data
+
+volumes:
+  shared_data:
