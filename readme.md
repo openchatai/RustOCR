@@ -38,6 +38,12 @@ This project is a Rust-based microservice designed for extracting text from scan
 
    The microservice will be running on `http://localhost:8000`.
 
+   **Docker Image:**
+
+   The latest build will appear for arm by default whenever code is pushed to the GitHub repo. For other architectures, use the edge build tag or build from source. Contributions are welcome.
+
+   [Docker Hub - Rust OCR Microservice](https://hub.docker.com/repository/docker/codebanesr/rust_ocr/tags?page=1&ordering=last_updated)
+
 ## Usage
 
 ### Text Extraction
@@ -48,7 +54,7 @@ Retrieve the extracted text from a previously uploaded document using the follow
 curl --location 'http://localhost:8000/api/file/ocr' \
 --form 'file=@"/Users/shanurrahman/Downloads/sample_scannable.png"'
 ```
-replace sample_scannable.png with your file path
+Replace `sample_scannable.png` with your file path.
 
 ## Contributors
 
