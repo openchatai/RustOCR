@@ -33,7 +33,7 @@ COPY . .
 RUN . $HOME/.cargo/env && cargo build --release
 
 # New stage to copy image into Alpine
-FROM debian:stable-slim  
+FROM debian:stable-slim
 RUN apt-get update && apt-get install -y tesseract-ocr
 COPY --from=build /app/target/release/scanner /usr/local/bin/scanner
 CMD ["/usr/local/bin/scanner"]
