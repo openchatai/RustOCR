@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM debian:stable-slim as build
 
 # Install Rust
 RUN apt-get update && \
@@ -32,4 +32,8 @@ COPY . .
 # Build the Rust application
 RUN . $HOME/.cargo/env && cargo build --release
 
-CMD ["/app/target/release/scanner"]
+# New stage to copy image into Alpine
+FROM debian:stable-slim  
+RUN apt-get update && apt-get install -y tesseract-ocr
+COPY --from=build /app/target/release/scanner /usr/local/bin/scanner
+CMD ["/usr/local/bin/scanner"]
