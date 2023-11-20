@@ -1,11 +1,11 @@
 version: '3'
 
 services:
-  scanner:
+  rust_ocr:
     build: 
       context: .
       dockerfile: Dockerfile
-    image: codebanesr/scanner:latest
+    image: codebanesr/rust_ocr:latest
     ports:
       - "8000:8000"
     volumes:
