@@ -6,24 +6,21 @@ This project is a Rust-based microservice designed for extracting text from scan
 
 ## Features
 
-- **File Upload**: Easily upload scanned documents in various formats for text extraction.
-
 - **Text Extraction**: Utilize OCR capabilities to extract text from uploaded scanned documents.
 
-## Installation
-
+## Usage
 1. Ensure you have Rust installed on your system.
 
 2. Clone the repository:
 
     ```bash
-    git clone https://github.com/openchatai/rust_ocr
+    git clone https://github.com/yourusername/ocr-microservice.git
     ```
 
 3. Navigate to the project directory:
 
     ```bash
-    cd rust_ocr
+    cd ocr-microservice
     ```
 
 4. Build the project:
@@ -35,31 +32,52 @@ This project is a Rust-based microservice designed for extracting text from scan
 5. Run the microservice:
 
     ```bash
-    ./target/release/rust_ocr
+    ./target/release/ocr-microservice
     ```
 
    The microservice will be running on `http://localhost:8000`.
 
-## Usage
+   **Docker Image:**
 
-### File Upload
+   The latest build will appear for arm by default whenever code is pushed to the GitHub repo. For other architectures, use the edge build tag or build from source. Contributions are welcome.
 
-Use the following `curl` command to upload a scanned document:
+   [Docker Hub - Rust OCR Microservice](https://hub.docker.com/repository/docker/codebanesr/rust_ocr/tags?page=1&ordering=last_updated)
+
+## Using Prebuilt Docker Images
+
+Prebuilt Docker images for the Rust OCR Microservice are available on Docker Hub. You can choose the appropriate image for your architecture from the following link:
+
+- [Docker Hub - Rust OCR](https://hub.docker.com/repository/docker/codebanesr/rust_ocr/tags?page=1&ordering=last_updated)
+
+Once you have pulled the Docker image, you can run the Rust OCR Microservice using the following command:
 
 ```bash
-curl --location 'http://localhost:8000/api/file/upload' \
---form 'file=@"/path/to/your/scanned/document.png"'
+docker run -p 8000:8000 codebanesr/rust_ocr:your_tag
+```
+
+Replace `your_tag` with the specific tag of the Docker image you want to use.
+
+## Using Docker Compose
+
+```yaml
+version: '3'
+
+services:
+  rust_ocr:
+    image: codebanesr/rust_ocr:edge
+    ports:
+      - "8000:8000"
 ```
 
 ### Text Extraction
 
-Retrieve the extracted text from a previously uploaded document using the following `curl` command:
+Retrieve the extracted text using the following `curl` command:
 
 ```bash
-curl --location 'http://localhost:8000/api/ocr?filename=your_document_filename.png'
+curl --location 'http://localhost:8000/api/file/ocr' \
+--form 'file=@"/Users/shanurrahman/Downloads/sample_scannable.png"'
 ```
-
-Replace `your_document_filename.png` with the actual filename of the document you uploaded.
+Replace `sample_scannable.png` with your file path.
 
 ## Contributors
 
