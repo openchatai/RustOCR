@@ -14,7 +14,7 @@ This project is a Rust-based microservice designed for extracting text from scan
 2. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/rust_ocr.git
+    git clone https://github.com/openchatai/rust_ocr
     ```
 
 3. Navigate to the project directory:
