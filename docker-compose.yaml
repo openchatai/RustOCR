@@ -7,4 +7,4 @@ services:
       dockerfile: Dockerfile
     image: codebanesr/scanner:latest
     ports:
-      - "8223:8000"
+      - "8000:8000"
