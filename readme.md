@@ -6,8 +6,6 @@ This project is a Rust-based microservice designed for extracting text from scan
 
 ## Features
 
-- **File Upload**: Easily upload scanned documents in various formats for text extraction.
-
 - **Text Extraction**: Utilize OCR capabilities to extract text from uploaded scanned documents.
 
 ## Installation
@@ -42,24 +40,15 @@ This project is a Rust-based microservice designed for extracting text from scan
 
 ## Usage
 
-### File Upload
-
-Use the following `curl` command to upload a scanned document:
-
-```bash
-curl --location 'http://localhost:8000/api/file/upload' \
---form 'file=@"/path/to/your/scanned/document.png"'
-```
-
 ### Text Extraction
 
 Retrieve the extracted text from a previously uploaded document using the following `curl` command:
 
 ```bash
-curl --location 'http://localhost:8000/api/ocr?filename=your_document_filename.png'
+curl --location 'http://localhost:8000/api/file/ocr' \
+--form 'file=@"/Users/shanurrahman/Downloads/sample_scannable.png"'
 ```
-
-Replace `your_document_filename.png` with the actual filename of the document you uploaded.
+replace sample_scannable.png with your file path
 
 ## Contributors
 

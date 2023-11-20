@@ -1,8 +1,5 @@
-use std::path::PathBuf;
-
 use actix_multipart::form::{MultipartForm, tempfile::TempFile};
 use actix_web::{get, web, HttpResponse, Responder, post};
-use serde::Deserialize;
 use serde_json::json;
 use tesseract::ocr;
 
@@ -11,7 +8,7 @@ pub struct Upload {
     file: TempFile,
 }
 
-#[post("/file/upload")]
+#[post("/file/ocr")]
 pub async fn upload_file(form: MultipartForm<Upload>) -> HttpResponse {
     const MAX_FILE_SIZE: usize = 1024 * 1024 * 10; // 10 MB
 
@@ -25,36 +22,9 @@ pub async fn upload_file(form: MultipartForm<Upload>) -> HttpResponse {
         _ => {}
     };
     
-    let temp_file_path = form.file.file.path();
-    let file_name: &str = form
-        .file
-        .file_name
-        .as_ref()
-        .map(|m| m.as_ref())
-        .unwrap_or("null");
+    let temp_file_path = form.file.file.path().to_str().unwrap();
 
-    let mut file_path = PathBuf::from(&"/tmp/shared_data");
-    file_path.push(&file_name);
-
-    match std::fs::rename(temp_file_path, file_path) {
-        Ok(_) => HttpResponse::Ok().finish(),
-        Err(err) => {
-            print!("Error occured : {:}", err);
-            HttpResponse::InternalServerError().finish()
-        },
-    }
-}
-
-
-#[derive(Deserialize)]
-pub struct FileInfo {
-    filename: String,
-}
-
-#[get("/ocr")]
-pub async fn extract_text(web::Query(info): web::Query<FileInfo>) -> HttpResponse {
-    let filename = format!("/tmp/shared_data/{}", info.filename);
-    let result = ocr(&filename, "eng");
+    let result = ocr(temp_file_path, "eng");
     match result {
         Ok(data) => {
             println!("{:?}", data);
@@ -77,8 +47,7 @@ async fn health_checker_handler() -> impl Responder {
 pub fn config(conf: &mut web::ServiceConfig) {
     let scope = web::scope("/api")
         .service(health_checker_handler)
-        .service(upload_file)
-        .service(extract_text);
+        .service(upload_file);
 
     conf.service(scope);
 }
