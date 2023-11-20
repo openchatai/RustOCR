@@ -14,13 +14,13 @@ This project is a Rust-based microservice designed for extracting text from scan
 2. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/ocr-microservice.git
+    git clone https://github.com/yourusername/rust_ocr.git
     ```
 
 3. Navigate to the project directory:
 
     ```bash
-    cd ocr-microservice
+    cd rust_ocr
     ```
 
 4. Build the project:
@@ -32,7 +32,7 @@ This project is a Rust-based microservice designed for extracting text from scan
 5. Run the microservice:
 
     ```bash
-    ./target/release/ocr-microservice
+    ./target/release/rust_ocr
     ```
 
    The microservice will be running on `http://localhost:8000`.
